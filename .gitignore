@@ -1,0 +1,9 @@
+# Lines that start with '#' are comments.
+*~
+bin/
+.classpath
+.project
+.settings
+.pydevproject
+META-INF/
+*.jardesc

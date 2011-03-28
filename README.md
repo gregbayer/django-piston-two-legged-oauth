@@ -20,22 +20,22 @@ django-piston-two-legged-oauth is a simple 2-legged OAuth connector for Django P
 
 \# urls.py
 
-from api.authentication import TwoLeggedOAuthAuthentication
-from api.handlers import DoSomethingHandler
+    from api.authentication import TwoLeggedOAuthAuthentication
+    from api.handlers import DoSomethingHandler
 
-two_legged_oauth = TwoLeggedOAuthAuthentication(realm='API')
+    two_legged_oauth = TwoLeggedOAuthAuthentication(realm='API')
 
-class CsrfExemptResource( Resource ):
-    def __init__( self, handler, authentication = None ):
-        super( CsrfExemptResource, self ).__init__( handler, authentication )
-        self.csrf_exempt = getattr( self.handler, 'csrf_exempt', True )
+    class CsrfExemptResource( Resource ):
+        def __init__( self, handler, authentication = None ):
+            super( CsrfExemptResource, self ).__init__( handler, authentication )
+            self.csrf_exempt = getattr( self.handler, 'csrf_exempt', True )
 
-def TwoLeggedOAuthAProtectedResource(handler):
-    return CsrfExemptResource(handler=handler, authentication=two_legged_oauth)
+    def TwoLeggedOAuthAProtectedResource(handler):
+        return CsrfExemptResource(handler=handler, authentication=two_legged_oauth)
 
-do_something = TwoLeggedOAuthAProtectedResource( DoSomethingHandler )
+    do_something = TwoLeggedOAuthAProtectedResource( DoSomethingHandler )
 
-urlpatterns = patterns('',
-    url( r'^do_something', do_something, name='do_something'),
+    urlpatterns = patterns('',
+        url( r'^do_something', do_something, name='do_something'),
     )
 
