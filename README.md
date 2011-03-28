@@ -30,10 +30,10 @@ django-piston-two-legged-oauth is a simple 2-legged OAuth connector for Django P
             super( CsrfExemptResource, self ).__init__( handler, authentication )
             self.csrf_exempt = getattr( self.handler, 'csrf_exempt', True )
 
-    def TwoLeggedOAuthAProtectedResource(handler):
+    def TwoLeggedOAuthProtectedResource(handler):
         return CsrfExemptResource(handler=handler, authentication=two_legged_oauth)
 
-    do_something = TwoLeggedOAuthAProtectedResource( DoSomethingHandler )
+    do_something = TwoLeggedOAuthProtectedResource( DoSomethingHandler )
 
     urlpatterns = patterns('',
         url( r'^do_something', do_something, name='do_something'),
